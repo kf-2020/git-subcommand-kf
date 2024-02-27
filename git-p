@@ -1,0 +1,14 @@
+#!/bin/bash
+
+TRACKING_BRANCH_INFO=$(git status -sb | head -n 1)
+if [ "`echo $TRACKING_BRANCH_INFO | grep -E '(origin/develop|origin/release|origin/master)'`" ]; then
+    echo "!!! push禁止ブランチです。$TRACKING_BRANCH_INFO";
+    exit;
+fi
+
+CURRENT_BRANCH_NAME=$(git symbolic-ref --short HEAD)
+
+read -p "$CURRENT_BRANCH_NAME ブランチをpushします。よろしいですか？(y/n) : " check_ok_flg
+if [ "$check_ok_flg" != "y" ];then exit; fi
+
+git push --set-upstream origin $CURRENT_BRANCH_NAME

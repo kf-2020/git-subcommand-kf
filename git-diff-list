@@ -1,0 +1,11 @@
+#!/bin/bash
+BRANCH_NAME=`git rev-parse --abbrev-ref @`;
+DERIVERD_BRANCH_NAME=`git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'`
+
+if [[ `echo $DERIVERD_BRANCH_NAME` ]] ; then
+  git diff origin/$DERIVERD_BRANCH_NAME... --name-only 
+elif [[ `echo $BRANCH_NAME | grep 'feature'` ]] ; then
+  git diff origin/develop... --name-only 
+else
+  git diff origin/master... --name-only 
+fi

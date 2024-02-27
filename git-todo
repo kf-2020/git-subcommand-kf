@@ -1,0 +1,25 @@
+#!/bin/bash
+BRANCH_NAME=`git rev-parse --abbrev-ref @`;
+DERIVERD_BRANCH_NAME=`git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'`;
+
+if [[ $1 == *-h* ]] ; then
+  echo "現在自身が開発しているブランチに残してある「todo」をリストアップします。"
+  echo "usage: git todo [<options>]"
+  echo ""
+  echo "       -h  ヘルプを表示します。 "
+  exit
+fi
+
+if [[ `echo $DERIVERD_BRANCH_NAME` ]] ; then
+  BRANCH_TYPE="origin/$DERIVERD_BRANCH_NAME"
+elif [[ `echo $BRANCH_NAME | grep 'feature'` ]] ; then
+  BRANCH_TYPE="origin/develop"
+else
+  BRANCH_TYPE="origin/master"
+fi
+
+echo " $BRANCH_NAME <---> $BRANCH_TYPE
+"
+
+f() { for fn in `git diff --name-only $BRANCH_TYPE...`;do if [ -f $fn ];then git grep -i todo $fn;fi done };f
+echo ""

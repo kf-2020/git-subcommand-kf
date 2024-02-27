@@ -1,0 +1,9 @@
+#!/bin/bash
+BRANCH_NAME_NAMING_RULE=$(git branch | sed -e '/*/d' | grep "$1" -m1 | sed -e "s/ //g")
+
+if [ "$BRANCH_NAME_NAMING_RULE" != "" ]; then
+        echo "ブランチ【 $BRANCH_NAME_NAMING_RULE 】をチェックアウトします。"
+        git checkout $BRANCH_NAME_NAMING_RULE
+else
+        echo "\"$1\"を含むcheckout可能なブランチが見つかりませんでした"
+fi
