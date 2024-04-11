@@ -21,11 +21,9 @@ brew install jq
 git clone git@github.com:kf-2020/git-subcommand-kf.git && cd $(basename $_ .git)
 ```
 
-- git-subcommand-kfディレクトリについてパスを通す
+- 初期導入用シェル実行
 ```shell
-# (※git-subcommand-kfディレクトリ上に移動し以下実行)
-echo "" >> ~/.bash_profile
-echo "export PATH=\$PATH:$(pwd)" >> ~/.bash_profile
+./initialize.sh
 ```
 
 # Usage
