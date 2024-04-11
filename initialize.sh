@@ -16,6 +16,3 @@ elif [ "$SHELL_NAME" = "zsh" ]; then
         echo "export PATH=\"\$PATH:$(pwd)\"" >> ~/.zshrc
     fi
 fi
-
-# 配下のサブコマンドファイルに実行権限付与
-chmod 755 ./git-*
