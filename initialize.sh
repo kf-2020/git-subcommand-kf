@@ -16,3 +16,5 @@ elif [ "$SHELL_NAME" = "zsh" ]; then
         echo "export PATH=\"\$PATH:$(pwd)\"" >> ~/.zshrc
     fi
 fi
+
+echo "初期構築完了."
