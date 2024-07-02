@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TRACKING_BRANCH_INFO=$(git status -sb | head -n 1)
-if [ "`echo $TRACKING_BRANCH_INFO | grep -E '(origin/develop|origin/release|origin/master)'`" ]; then
+if [ "`echo $TRACKING_BRANCH_INFO | grep -E '(origin/develop|origin/release|origin/master|origin/main)'`" ]; then
     echo "!!! push禁止ブランチです。$TRACKING_BRANCH_INFO";
     exit;
 fi
